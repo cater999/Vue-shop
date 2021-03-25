@@ -1,0 +1,44 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "8777038",
+      "name": "lock",
+      "font_class": "icon-test",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "20559284",
+      "name": "008minus04",
+      "font_class": "008minus04",
+      "unicode": "e79d",
+      "unicode_decimal": 59293
+    },
+    {
+      "icon_id": "20559286",
+      "name": "013cross02",
+      "font_class": "013cross02",
+      "unicode": "e79e",
+      "unicode_decimal": 59294
+    },
+    {
+      "icon_id": "20559387",
+      "name": "116key",
+      "font_class": "116key",
+      "unicode": "e7a9",
+      "unicode_decimal": 59305
+    },
+    {
+      "icon_id": "20559486",
+      "name": "241user04",
+      "font_class": "241user04",
+      "unicode": "e7b4",
+      "unicode_decimal": 59316
+    }
+  ]
+}
