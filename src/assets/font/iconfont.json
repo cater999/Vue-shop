@@ -13,6 +13,34 @@
       "unicode_decimal": 58948
     },
     {
+      "icon_id": "8989499",
+      "name": "shop",
+      "font_class": "shop",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "10265400",
+      "name": "data analysis",
+      "font_class": "dataanalysis",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "15838610",
+      "name": "task-filling",
+      "font_class": "task-filling",
+      "unicode": "e68c",
+      "unicode_decimal": 59020
+    },
+    {
+      "icon_id": "16617911",
+      "name": "bill",
+      "font_class": "bill",
+      "unicode": "e695",
+      "unicode_decimal": 59029
+    },
+    {
       "icon_id": "20559284",
       "name": "008minus04",
       "font_class": "008minus04",
