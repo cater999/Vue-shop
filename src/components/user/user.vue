@@ -46,7 +46,7 @@
                         <el-button type="primary" icon="el-icon-edit" size="mini" @click="openEditUser(scope.row.id)"></el-button>
                         <el-button type="danger" icon="el-icon-delete" size="mini" @click="confirmDelete(scope.row.id)"></el-button>
                         <el-tooltip class="item" effect="dark" content="设置" placement="top" :enterable="false">
-                            <el-button type="warning" icon="el-icon-share" size="mini" ></el-button>
+                            <el-button type="warning" icon="el-icon-share" size="mini" @click="openSetRoleDialog(scope.row)"></el-button>
                         </el-tooltip>
                         
                     </template>
@@ -120,6 +120,38 @@
             </span>
         
         </el-dialog>
+
+        <!-- 修改用户角色 -->
+        <el-dialog
+        title="修改用户角色"
+        :visible.sync="setRoledialogVisible"
+        width="50%"
+        >
+            <div class="showUserInfo">
+                <span style="margin-right: 35px;"><el-tag type="success">用户名</el-tag></span><strong>{{userInfo.username}}</strong>
+            </div>
+
+            <div class="showUserInfo">
+                <span style="margin-right: 35px;"><el-tag type="success">当前角色</el-tag></span><strong>{{userInfo.role_name}}</strong>
+            </div>
+            
+            <div class="showUserInfo">
+                 <span style="margin-right: 35px;"><el-tag type="success">当前角色</el-tag></span>
+                <el-select v-model="roleValue" placeholder="请选择">
+                    <el-option
+                    v-for="item in roleOptions"
+                    :key="item.id"
+                    :label="item.roleName"
+                    :value="item.id">
+                    </el-option>
+                </el-select>
+            </div>
+
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="setRoledialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="comfirmToChangeRole">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -192,7 +224,15 @@ export default {
                 mobile: [
                     { validator: checkPhone , trigger: 'blur'}
                 ]
-            }
+            },
+            // 控制设置用户角色对话框的显示与隐藏
+            setRoledialogVisible: false,
+            // 保存被修改用户角色的信息
+            userInfo: {},
+            // 下拉选择上的角色名
+            roleValue: '',
+            // 下拉框角色选择
+            roleOptions: []
         }
     },
     methods: {
@@ -203,7 +243,7 @@ export default {
             } else {
                 this.userList = get.data.data.users;
                 this.total = get.data.data.total
-                console.log(this.userList);
+                
             }
         },
 
@@ -324,8 +364,31 @@ export default {
                     message: '已取消删除'
                 });          
             });
-        }
+        },
 
+        // 打开修改用户角色对话框
+        async openSetRoleDialog(user) {
+            // 每次打开都要重新置空
+            this.roleValue = '';
+            this.userInfo = user;
+            const { data: res} = await this.$http.get('/roles');
+            if (res.meta.status != 200) return this.$message.error('请求角色名称失败');
+            this.roleOptions = res.data;
+            
+            this.setRoledialogVisible = true;
+        },
+
+        async comfirmToChangeRole() {
+            
+            const {data:res} = await this.$http.put('/users/'+this.userInfo.id+'/role',{
+                rid: this.roleValue
+            });
+            
+            if (res.meta.status != 200 ) return this.$message.error('修改用户权限失败');
+            this.getUserList();
+            this.$message.success('修改用户权限成功！')
+            this.setRoledialogVisible = false;
+        }
     }
 }
 </script>
@@ -340,5 +403,18 @@ export default {
     margin-top: 35px;
 }
 
+.showUserInfo {
+    height: 55px;
+    span {
+        display: inline-block;
+        width: 100px;
+        text-align: center;
+        font-size: 18px;
+        
+    }
 
+    strong {
+        font-size: 18px;
+    }
+}
 </style>
