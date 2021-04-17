@@ -155,20 +155,6 @@ export default {
             });
         },
 
-        // 获取三级结点的id
-        getThrNode(role) {
-            // 先置空
-            this.checkedKeys = [];
-             // 打开的同时，将三级列表的值赋给checkedKeys
-            role.children.forEach( item1 => {
-                item1.children.forEach( item2 => {
-                    item2.children.forEach( item3 => {
-                        this.checkedKeys.push(item3.id);
-                    })
-                })
-            });
-        },
-
         // 打开分配权限的对话框
         async openAssignDialog(role) {
 

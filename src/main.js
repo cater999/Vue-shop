@@ -5,9 +5,14 @@ import './plugins/element.js'
 
 // 引入全局css样式
 import './assets/css/global.css'
+
 // 引入iconfont
 import './assets/font/iconfont.css'
 Vue.config.productionTip = false
+
+// 引入 vue-table-with-tree
+import ZkTable from 'vue-table-with-tree-grid'
+Vue.component('vue-table', ZkTable);
 
 // 引入axios
 import axios from 'axios'
@@ -16,8 +21,9 @@ axios.interceptors.request.use(config => {
 
     config.headers.Authorization = window.sessionStorage.getItem('token');
     return config;
-})
+});
 Vue.prototype.$http = axios;
+
 
 new Vue({
     router,

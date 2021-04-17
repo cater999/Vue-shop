@@ -16,3 +16,7 @@ body,
 .el-breadcrumb {
     margin-bottom: 35px;
 }
+
+.el-scrollbar__wrap {
+    height: 450px!important;
+}
