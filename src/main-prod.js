@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import './plugins/element.js'
+// import './plugins/element.js'
 
 // 挂载富文本
 import VueQuillEditor from 'vue-quill-editor'
 // require styles
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
+// import 'quill/dist/quill.core.css'
+// import 'quill/dist/quill.snow.css'
+// import 'quill/dist/quill.bubble.css'
 Vue.use(VueQuillEditor);
 
 // 引入全局css样式
@@ -22,14 +22,25 @@ Vue.config.productionTip = false
 import ZkTable from 'vue-table-with-tree-grid'
 Vue.component('vue-table', ZkTable);
 
+// 引入nprogress
+import NProgress from 'nprogress'
+// import 'nprogress/nprogress.css'
+
 // 引入axios
 import axios from 'axios'
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 axios.interceptors.request.use(config => {
 
     config.headers.Authorization = window.sessionStorage.getItem('token');
+    NProgress.start();
     return config;
 });
+
+axios.interceptors.response.use(config => {
+    NProgress.done();
+    return config;
+})
+
 Vue.prototype.$http = axios;
 
 // 定一个时间过滤器
