@@ -3,6 +3,14 @@ import App from './App.vue'
 import router from './router'
 import './plugins/element.js'
 
+// 挂载富文本
+import VueQuillEditor from 'vue-quill-editor'
+// require styles
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+Vue.use(VueQuillEditor);
+
 // 引入全局css样式
 import './assets/css/global.css'
 
@@ -24,6 +32,18 @@ axios.interceptors.request.use(config => {
 });
 Vue.prototype.$http = axios;
 
+// 定一个时间过滤器
+Vue.filter('filterTime', function(param) {
+    const dt = new Date(param);
+    const year = dt.getFullYear();
+    const month = (dt.getMonth() + 1 + "").padStart(2, "0");
+    const date = (dt.getDate() + "").padStart(2, "0");
+
+    const h = (dt.getHours() + "").padStart(2, "0");
+    const m = (dt.getMinutes() + "").padStart(2, "0")
+    const s = (dt.getSeconds() + "").padStart(2, "0");
+    return `${year}-${month}-${date} ${h}:${m}:${s}`
+});
 
 new Vue({
     router,

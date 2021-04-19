@@ -20,3 +20,7 @@ body,
 .el-scrollbar__wrap {
     height: 450px!important;
 }
+
+.ql-editor {
+    height: 500px!important;
+}
